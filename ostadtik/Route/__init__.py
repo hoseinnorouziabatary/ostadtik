@@ -11,6 +11,7 @@ from ..price import db, Pricetable
 from flask import Blueprint, request, jsonify, flash
 from flask_login import login_user, logout_user
 
+
 __author__ = "NOROUZI"
 
 call = Blueprint("Calltime", __name__)
