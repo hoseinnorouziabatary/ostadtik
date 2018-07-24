@@ -3,7 +3,6 @@
 from flask_sqlalchemy import SQLAlchemy
 
 __author__ = "NOROUZI"
-
 dv = SQLAlchemy()
 
 
@@ -20,7 +19,7 @@ class Call(dv.Model):
     tainmm = dv.Column(dv.NVARCHAR(40), nullable=True)
     azindd = dv.Column(dv.NVARCHAR(40), nullable=True)
     taindd = dv.Column(dv.NVARCHAR(40), nullable=True)
-    teacherid = dv.Column(dv.NVARCHAR(50), dv.ForeignKey('teacher.TeacherID'), nullable=True)
+    teacherid = dv.Column(dv.NVARCHAR(50), dv.ForeignKey('Teacher.TeacherID'), nullable=True)
 
     def __init__(self, azinhour, tainhour, azinminutes, tainminutes, azinyy, tainyy, azinmm, tainmm, azindd, taindd):
         self.azinhour = azinhour
@@ -35,5 +34,4 @@ class Call(dv.Model):
         self.taindd = taindd
 
     def __repr__(self):
-        return '<calltime AzInHour{} TaInHour{} >' .format(self.azinhour, self.tainhour)
-
+        return '<Calltime AzInHour{} TaInHour{} >' .format(self.azinhour, self.tainhour)
