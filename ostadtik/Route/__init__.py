@@ -166,7 +166,7 @@ def register_teacher():
     return jsonify('hello')
 
 
-@cls.route('/Class', methods=['GET', 'POST'])
+@clss.route('/Class', methods=['GET', 'POST'])
 def get_class():
 
     data = Classtable.query.all()
@@ -181,7 +181,7 @@ def get_class():
     return jsonify(ClassTable=data_all)
 
 
-@cls.route("/Class/payment")
+@clss.route("/Class/payment")
 def payment():
     if Classtable.price <= Pricetable.accountostadbank:
         sub = Classtable.price - Pricetable.accountostadbank
