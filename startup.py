@@ -1,7 +1,7 @@
 from flask import Flask
 
 
-from ostadtik.Route.route import cal, clss, cmt, cour, prc, pro, stu, Tech
+from ostadtik.route.route import cal, clss, cmt, cour, prc, pro, stu, Tech
 
 __author__ = "NOROUZI"
 
