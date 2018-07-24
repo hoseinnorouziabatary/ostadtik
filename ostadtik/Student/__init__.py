@@ -1,42 +1,35 @@
 
 
-from flask import Flask, flash
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask_login import UserMixin, login_manager
-from ostadtik.Route import stu
+from flask import flash
 
 __author__ = "NOROUZI"
 
-app = Flask(__name__)
-app.register_blueprint(stu)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://scott:root@localhost/OSTADTIK'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SECRET_KEY'] = b'\xaelX\x1fI\xa4\xfc{\xb8\x11Zk\xa1\xdb,\xf7L5[Bty\x1c\xb4'
-db = SQLAlchemy(app)
-
+dst = SQLAlchemy()
 Login_manager = login_manager
 Login_manager.session_protection = "strong"
 
 
-class Student(db.Model, UserMixin):
-    __table_name__ = "Student"
-    studentid = db.Column(db.NVARCHAR(40), unique=True, nullable=True, primary_key=True)
-    firstnamestudent = db.Column(db.NVARCHAR(40), nullable=True)
-    lastnamestudent = db.Column(db.NVARCHAR(40), nullable=True)
-    username = db.Column(db.NVARCHAR(40), nullable=True)
-    email = db.Column(db.NVARCHAR(40), nullable=True)
-    passwordstudent = db.Column(db.NVARCHAR(40), nullable=True)
-    staticphone = db.Column(db.NVARCHAR(40), nullable=True)
-    dynamicphone = db.Column(db.NVARCHAR(40), nullable=True)
-    address = db.Column(db.NVARCHAR(40), nullable=True)
-    sex = db.Column(db.NVARCHAR(40), nullable=True)
-    deposited = db.Column(db.NVARCHAR(40), nullable=True)
-    accountstudent = db.Column(db.NVARCHAR(50), nullable=False)
-    flag = db.Column(db.BOOLEAN, nullable=True, flag=False)
+class Student(dst.Model, UserMixin):
+    __table_name__ = "student"
+    studentid = dst.Column(dst.NVARCHAR(40), unique=True, nullable=True, primary_key=True)
+    firstnamestudent = dst.Column(dst.NVARCHAR(40), nullable=True)
+    lastnamestudent = dst.Column(dst.NVARCHAR(40), nullable=True)
+    username = dst.Column(dst.NVARCHAR(40), nullable=True)
+    email = dst.Column(dst.NVARCHAR(40), nullable=True)
+    passwordstudent = dst.Column(dst.NVARCHAR(40), nullable=True)
+    staticphone = dst.Column(dst.NVARCHAR(40), nullable=True)
+    dynamicphone = dst.Column(dst.NVARCHAR(40), nullable=True)
+    address = dst.Column(dst.NVARCHAR(40), nullable=True)
+    sex = dst.Column(dst.NVARCHAR(40), nullable=True)
+    deposited = dst.Column(dst.NVARCHAR(40), nullable=True)
+    accountstudent = dst.Column(dst.NVARCHAR(50), nullable=False)
+    flag = dst.Column(dst.BOOLEAN, nullable=True)
 
     def __init__(self, firstnamestudent, lastnamestudent, username, email, passwordstudent, staticphone, accountstudent,
-                 dynamicphone, address, sex, deposited):
+                 dynamicphone, address, sex, deposited, flag):
         self.firstnamestudent = firstnamestudent
         self.lastnamestudent = lastnamestudent
         self.username = username
@@ -48,9 +41,10 @@ class Student(db.Model, UserMixin):
         self.sex = sex
         self.deposited = deposited
         self.accountstudent = accountstudent
+        self.flag = flag
 
     def __repr__(self):
-        return '<Student FirstNameStudent{},LastNameStudent{}>' .format(self.FirstNameStudent, self.LastNameStudent)
+        return '<student FirstNameStudent{},LastNameStudent{}>' .format(self.FirstNameStudent, self.LastNameStudent)
 
     @staticmethod
     def getuserpassword(username):
