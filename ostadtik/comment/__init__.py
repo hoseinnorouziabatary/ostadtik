@@ -1,32 +1,23 @@
 
-
-from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from ostadtik.Route import cmt
 
 
 __author__ = "NOROUZI"
 
-
-app = Flask(__name__)
-app.register_blueprint(cmt)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://scott:root@localhost/OSTADTIK'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SECRET_KEY'] = b'\xaelX\x1fI\xa4\xfc{\xb8\x11Zk\xa1\xdb,\xf7L5[Bty\x1c\xb4'
-db = SQLAlchemy(app)
+dcm = SQLAlchemy()
 
 
-class Comment(db.Model):
+class Comment(dcm.Model):
     __table_name__ = "Comment"
-    commentid = db.Column(db.NVARCHAR(50), primary_key=True, unique=True, nullable=True)
-    comment_text = db.Column(db.NVARCHAR(1000), nullable=True)
-    point = db.Column(db.INT, nullable=True)
-    reply_text = db.Column(db.NVARCHAR(1000), nullable=True)
-    classtableid = db.Column(db.NVARCHAR(50), db.ForeignKey('ClassTable.ClassTableID'), nullable=True)
-    firstnameteacher = db.Column(db.NVARCHAR(40), db.ForeignKey('Teacher.FirstNameTeacher'), nullable=True)
-    lastnameteacher = db.Column(db.NVARCHAR(40), db.ForeignKey('Teacher.LastNameTeacher'), nullable=True)
-    firstnamestudent = db.Column(db.NVARCHAR(40), db.ForeignKey('Student.FirstNameStudent'), nullable=True)
-    lastnamestudent = db.Column(db.NVARCHAR(40), db.ForeignKey('Student.LastNameStudent'), nullable=True)
+    commentid = dcm.Column(dcm.NVARCHAR(50), primary_key=True, unique=True, nullable=True)
+    comment_text = dcm.Column(dcm.NVARCHAR(1000), nullable=True)
+    point = dcm.Column(dcm.INT, nullable=True)
+    reply_text = dcm.Column(dcm.NVARCHAR(1000), nullable=True)
+    classtableid = dcm.Column(dcm.NVARCHAR(50), dcm.ForeignKey('ClassTable.ClassTableID'), nullable=True)
+    firstnameteacher = dcm.Column(dcm.NVARCHAR(40), dcm.ForeignKey('teacher.FirstNameTeacher'), nullable=True)
+    lastnameteacher = dcm.Column(dcm.NVARCHAR(40), dcm.ForeignKey('teacher.LastNameTeacher'), nullable=True)
+    firstnamestudent = dcm.Column(dcm.NVARCHAR(40), dcm.ForeignKey('student.FirstNameStudent'), nullable=True)
+    lastnamestudent = dcm.Column(dcm.NVARCHAR(40), dcm.ForeignKey('student.LastNameStudent'), nullable=True)
 
     def __init__(self, comment_text, point, reply_text):
         self.comment_text = comment_text
