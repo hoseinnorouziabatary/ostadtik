@@ -9,10 +9,9 @@ def create_app(app):
     db.init_app(app)
     with app.app_context():
         db.create_all()
-
     from ostadtik.Calltime.api import calltime as calltime_blueprint
     app.register_blueprint(calltime_blueprint)
-    from ostadtik.comment.api import comment as comment_blueprint
+    from ostadtik.comment.api import comment_blueprint
     app.register_blueprint(comment_blueprint)
     from ostadtik.course.api import course as course_blueprint
     app.register_blueprint(course_blueprint)

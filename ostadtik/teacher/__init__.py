@@ -1,7 +1,7 @@
 from sqlalchemy import Column, NVARCHAR, ForeignKey
 from flask_login import UserMixin
 
-from ostadtik.route import db
+from ostadtik import db
 
 __author__ = "NOROUZI"
 

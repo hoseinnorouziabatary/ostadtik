@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify, flash
 
-from ostadtik.route import db
+from ostadtik import db
 from ostadtik.course import Course
 
 __author__ = "NOROUZI"
@@ -9,7 +9,7 @@ course = Blueprint("course", __name__)
 
 
 @course.route('/course', methods=['GET','POST'])
-def course():
+def course_route():
     area = request.json['']
     city = request.json['']
     secctionname = request.json['']

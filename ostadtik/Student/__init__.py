@@ -2,7 +2,7 @@ from sqlalchemy import Column, NVARCHAR, BOOLEAN
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask_login import UserMixin
 
-from ostadtik.route import db
+from ostadtik import db
 from flask import flash
 
 __author__ = "NOROUZI"
@@ -21,7 +21,7 @@ class Student(db.Model, UserMixin):
     address = Column(NVARCHAR(40), nullable=True)
     sex = Column(NVARCHAR(40), nullable=True)
     deposited = Column(NVARCHAR(40), nullable=True)
-    accountstudent = Column(NVARCHAR(50), nullable=False)
+    accountstudent: Column(NVARCHAR(50), nullable=False)
     flag = Column(BOOLEAN, nullable=True)
 
     def __init__(self, firstnamestudent, lastnamestudent, username, email, passwordstudent, staticphone, accountstudent,

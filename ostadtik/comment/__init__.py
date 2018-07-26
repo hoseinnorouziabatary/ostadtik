@@ -1,6 +1,6 @@
 from sqlalchemy import Column, NVARCHAR, ForeignKey, INTEGER
 
-from ostadtik.route import db
+from ostadtik import db
 
 __author__ = "NOROUZI"
 

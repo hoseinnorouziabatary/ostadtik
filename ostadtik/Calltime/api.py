@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify, flash
 
-from ostadtik.route import db
+from ostadtik import db
 from ostadtik.Calltime import Call
 
 __author__ = "NOROUZI"

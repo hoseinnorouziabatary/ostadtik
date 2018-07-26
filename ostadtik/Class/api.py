@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify
 
 
-from ostadtik.route import db
+from ostadtik import db
 from ostadtik.Student import Student
 from ostadtik.price import Pricetable
 from ostadtik.Class import Classtable
@@ -26,10 +26,9 @@ def get_class():
 
 @classtable.route('/Class/payment', methods=['POST'])
 def payment():
-    if Classtable.price <= Pricetable.accountostadbank:
-        sub = Classtable.price - Pricetable.accountostadbank
+    if Classtable.price <= Pricetable.ostadbank:
+        sub = Classtable.price - Pricetable.ostadbank
         summ = Student.accountstudent + Classtable.price
         Student.query.filter_by(Student.accountstudent).Update(accountstudent=summ)
         Pricetable.query.filter_by(Pricetable.accountostadbank).Update(accountostadbank=sub)
         db.session.commit()
-

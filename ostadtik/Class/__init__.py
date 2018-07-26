@@ -1,6 +1,6 @@
 from sqlalchemy import Column, NVARCHAR, ForeignKey, INTEGER
 
-from ostadtik.route import db
+from ostadtik import db
 
 __author__ = "NOROUZI"
 
@@ -18,8 +18,8 @@ class Classtable(db.Model):
     teacherid = Column(db.NVARCHAR(50), ForeignKey('Teacher.TeacherID'), nullable=True)
     studentid = Column(db.NVARCHAR(50), ForeignKey('Student.StudentID'), nullable=True)
     courseid = Column(db.NVARCHAR(50), ForeignKey('Course.CourseID'), nullable=True)
-    day = Column(db.NVARCHAR(40), ForeignKey('Course.Day'), nullable=True)
-    hoursinday = Column(db.NVARCHAR(40), ForeignKey('Course.HoursInDay'), nullable=True)
+    day = Column(NVARCHAR(40), ForeignKey('Course.Day'), nullable=True)
+    hoursinday = Column(NVARCHAR(40), ForeignKey('Course.HoursInDay'), nullable=True)
 
     def __init__(self, price, hoursone, number_count, firstnamestudent, firstnameteacher, lastnamestudent,
                  lastnameteacher, day, hoursinday):

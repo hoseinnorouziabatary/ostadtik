@@ -1,18 +1,26 @@
+from flask import Flask
 
-
-from ostadtik import Class, comment, Calltime, Course, price, Profile, Student, Teacher
+from ostadtik import create_app
 
 __author__ = "NOROUZI"
 
-Teacher.app.run(Debog=True)
-Student.app.run(Debog=True)
-Class.app.run(Debog=True)
-comment.app.run(Debog=True)
-Calltime.app.run(Debog=True)
-Course.app.run(Debog=True)
-price.app.run(Debog=True)
-Profile.app.run(Debog=True)
+app = Flask(__name__)
 
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:norouziabatary@localhost/OSTADTIK'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SECRET_KEY'] = b'\xaelX\x1fI\xa4\xfc{\xb8\x11Zk\xa1\xdb,\xf7L5[Bty\x1c\xb4'
 
+# app.register_blueprint(cal)
+# app.register_blueprint(clss)
+# app.register_blueprint(cmt)
+# app.register_blueprint(cour)
+# app.register_blueprint(prc)
+# app.register_blueprint(pro)
+# app.register_blueprint(stu)
+# app.register_blueprint(Tech)
 
+app = create_app(app)
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", debug=True, port=3000)
 

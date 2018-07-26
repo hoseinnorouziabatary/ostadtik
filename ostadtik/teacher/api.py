@@ -1,6 +1,6 @@
 from flask import Blueprint, request, flash, jsonify
 
-from ostadtik.route import db
+from ostadtik import db
 from ostadtik.teacher import Teacher
 from ostadtik.Student import Student
 

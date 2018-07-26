@@ -1,15 +1,15 @@
 from flask import Blueprint, request, jsonify, flash
 
-from ostadtik.route import db
+from ostadtik import db
 from ostadtik.comment import Comment
 
 __author__ = "NOROUZI"
 
-comment = Blueprint("comment", __name__)
+comment_blueprint = Blueprint("comment", __name__)
 
 
-@comment.route('/comment', methods=['GET', 'POST'])
-def comment():
+@comment_blueprint.route('/comment', methods=['GET', 'POST'])
+def comment_route():
     comment_text = request.json['']
     point = request.json['']
     reply_text = request.json['']

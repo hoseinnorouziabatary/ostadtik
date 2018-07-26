@@ -1,6 +1,6 @@
 from flask import Blueprint, request
 
-from ostadtik.route import db
+from ostadtik import db
 from ostadtik.profile import Profile
 
 __author__ = "NOROUZI"
