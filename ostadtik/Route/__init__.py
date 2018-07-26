@@ -1,31 +1,32 @@
 
 
-from ..Calltime import db, Call
-from ..comment import db, Comment
-from ..Course import db, Course
-from ..Student import db, Student
-from ..Teacher import db, Teacher
-from ..Profile import db
-from ..Class import db, Classtable
-from ..price import db, Pricetable
 from flask import Blueprint, request, jsonify, flash
 from flask_login import login_user, logout_user
+from ostadtik.Calltime import Call, dv
+from ostadtik.comment import Comment, db
+from ostadtik.Course import Course, dc
+from ostadtik.Student import Student, dst
+from ostadtik.Teacher import Teacher, dt
+from ostadtik.Profile import Profile, dp
+from ostadtik.Class import Classtable, dcl
+from ostadtik.price import Pricetable, dpr
+
 
 
 __author__ = "NOROUZI"
 
-call = Blueprint("Calltime", __name__)
+cal = Blueprint("Calltime", __name__)
 cmt = Blueprint("comment", __name__)
 cour = Blueprint("Course", __name__)
-stu = Blueprint("Student", __name__)
-Tech = Blueprint("Teacher", __name__)
-pro = Blueprint("Profile", __name__)
-clss = Blueprint("Profile", __name__)
+stu = Blueprint("student", __name__)
+Tech = Blueprint("teacher", __name__)
+pro = Blueprint("profile", __name__)
+clss = Blueprint("profile", __name__)
 prc = Blueprint("price", __name__)
 
 
-@call.route('/Call', methods=['POST'])
-def call():
+@cal.route('/Call', methods=['POST'])
+def cal():
     azinhour = request.json['']
     tainhour = request.json['']
     azinminutes = request.json['']
@@ -37,9 +38,9 @@ def call():
     azindd = request.json['']
     taindd = request.json['']
 
-    db.session.add(Call(azinhour=azinhour, tainhour=tainhour, azinminutes=azinminutes, tainminutes=tainminutes,
+    dv.session.add(Call(azinhour=azinhour, tainhour=tainhour, azinminutes=azinminutes, tainminutes=tainminutes,
                         azinyy=azinyy, tainyy=tainyy, azinmm=azinmm, tainmm=tainmm, azindd=azindd, taindd=taindd))
-    db.session.commit()
+    dv.session.commit()
 
     flash("The operation was successful")
     return jsonify('')
@@ -74,10 +75,10 @@ def course():
     day = request.json['']
     hoursinday = request.json['']
 
-    db.session.add(Course(area=area, city=city, secctionname=secctionname, hoursone=hoursone, number_count=numbercount,
+    dc.session.add(Course(area=area, city=city, secctionname=secctionname, hoursone=hoursone, number_count=numbercount,
                           price=price, lastname=lastname, firstname=firstname,
                           count_class=countclass, capacity=capacity, day=day, hoursinday=hoursinday))
-    db.session.commit()
+    dc.session.commit()
 
 
 @stu.route('/register', methods=["GET", "POST"])
@@ -95,12 +96,12 @@ def register():
         depositedy = request.json['']
 
         if rewritepassword == password:
-            db.session.add(Student(username=username, passwordstudent=password,
-                                   firstnamestudent=firstname, lastnamestudent=lastname, email=email,
-                                   staticphone=staticphone, dynamicphone=dynamicphone, address=address, sex=sex,
-                                   deposited=depositedy, accountstudent=0))
+            dst.session.add(Student(username=username, passwordstudent=password, firstnamestudent=firstname,
+                                    lastnamestudent=lastname, email=email,  staticphone=staticphone,
+                                    dynamicphone=dynamicphone, address=address, sex=sex, deposited=depositedy,
+                                    accountstudent=0, flag=False))
 
-            db.session.commit()
+            dst.session.commit()
 
         flash("User registered successfully !")
         return jsonify('hello')
@@ -133,7 +134,20 @@ def update():
     updateaccont = request.json[""]
 
     Student.query.filter_by(Student.accountstudent).Update(accountstudent=updateaccont)
-    db.session.commit()
+    dst.session.commit()
+
+
+@pro.route('/register_profile', method=["POST"])
+def registerprofile():
+    pdf = request.json['']
+    video = request.json['']
+    pictuer = request.json['']
+    lastname = request.json['']
+    firstname = request.json['']
+    activenon = request.json['']
+
+    dp.session.add(Profile(pdf=pdf, video=video, pictuer=pictuer, lastname=lastname, firstname=firstname,
+                           activenon=activenon))
 
 
 @Tech.route('/registerTeacher', methods=["GET", "POST"])
@@ -145,9 +159,9 @@ def register_teacher():
 
     Student.query.filter_by(Student.flag).Update(flag=True)
 
-    db.session.add(Teacher(educationalrecords=educationalrecords, academichonors=academichonors,
+    dt.session.add(Teacher(educationalrecords=educationalrecords, academichonors=academichonors,
                            lastnameteacher=lastnameteacher, firstnameteacher=firstnameteacher,))
-    db.session.commit()
+    dt.session.commit()
 
     flash("User registered successfully !")
     return jsonify('hello')
@@ -168,19 +182,21 @@ def get_class():
     return jsonify(ClassTable=data_all)
 
 
-if Course.price <= Pricetable.accountostadbank:
-    sub = Course.price - Pricetable.accountostadbank
-    Total = Student.accountstudent + Course.price
-    Student.query.filter_by(Student.accountstudent).Update(accountstudent=Total)
-    Pricetable.query.filter_by(Pricetable.accountostadbank).Update(accountostadbank=sub)
-    db.session.commit()
+@clss.route("/Class/payment")
+def payment():
+    if Classtable.price <= Pricetable.accountostadbank:
+        sub = Classtable.price - Pricetable.accountostadbank
+        summ = Student.accountstudent + Classtable.price
+        Student.query.filter_by(Student.accountstudent).Update(accountstudent=summ)
+        Pricetable.query.filter_by(Pricetable.accountostadbank).Update(accountostadbank=sub)
+        dcl.session.commit()
 
 
-@clss.route("/Class/transaction", methods=['GET'])
+@prc.route("/Class/payment/transaction", methods=['GET'])
 def transaction():
-    if Course.price <= Student.accountstudent:
-        trans = Course.price - Student.accountstudent.Where(Pricetable.lastnamestudent == Student.lastnamestudent)
+    if course.price <= Student.accountstudent:
+        trans = course.price - Student.accountstudent.Where(Pricetable.lastnamestudent == Student.lastnamestudent)
         Student.query.filter_by(Student.accountstudent).Update(accountstudent=trans)
-        Pricetable.query.filter_by(Pricetable.accountostadbank).Update(accountostadbank=Course.price)
-        db.session.commit()
+        Pricetable.query.filter_by(Pricetable.accountostadbank).Update(accountostadbank=course.price)
+        dpr.session.commit()
     return flash("Inventory is not enough")
