@@ -1,32 +1,28 @@
-
-
-from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import Column, NVARCHAR, BOOLEAN
 from werkzeug.security import check_password_hash, generate_password_hash
-from flask_login import UserMixin, login_manager
+from flask_login import UserMixin
+
+from ostadtik.route import db
 from flask import flash
 
 __author__ = "NOROUZI"
 
-dst = SQLAlchemy()
-Login_manager = login_manager
-Login_manager.session_protection = "strong"
 
-
-class Student(dst.Model, UserMixin):
+class Student(db.Model, UserMixin):
     __table_name__ = "student"
-    studentid = dst.Column(dst.NVARCHAR(40), unique=True, nullable=True, primary_key=True)
-    firstnamestudent = dst.Column(dst.NVARCHAR(40), nullable=True)
-    lastnamestudent = dst.Column(dst.NVARCHAR(40), nullable=True)
-    username = dst.Column(dst.NVARCHAR(40), nullable=True)
-    email = dst.Column(dst.NVARCHAR(40), nullable=True)
-    passwordstudent = dst.Column(dst.NVARCHAR(40), nullable=True)
-    staticphone = dst.Column(dst.NVARCHAR(40), nullable=True)
-    dynamicphone = dst.Column(dst.NVARCHAR(40), nullable=True)
-    address = dst.Column(dst.NVARCHAR(40), nullable=True)
-    sex = dst.Column(dst.NVARCHAR(40), nullable=True)
-    deposited = dst.Column(dst.NVARCHAR(40), nullable=True)
-    accountstudent = dst.Column(dst.NVARCHAR(50), nullable=False)
-    flag = dst.Column(dst.BOOLEAN, nullable=True)
+    Studentid = Column(NVARCHAR(50), unique=True, nullable=True, primary_key=True)
+    firstnamestudent = Column(NVARCHAR(40), nullable=True)
+    lastnamestudent = Column(NVARCHAR(40), nullable=True)
+    username = Column(NVARCHAR(40), nullable=True)
+    email = Column(NVARCHAR(40), nullable=True)
+    passwordstudent = Column(NVARCHAR(40), nullable=True)
+    staticphone = Column(NVARCHAR(40), nullable=True)
+    dynamicphone = Column(NVARCHAR(40), nullable=True)
+    address = Column(NVARCHAR(40), nullable=True)
+    sex = Column(NVARCHAR(40), nullable=True)
+    deposited = Column(NVARCHAR(40), nullable=True)
+    accountstudent = Column(NVARCHAR(50), nullable=False)
+    flag = Column(BOOLEAN, nullable=True)
 
     def __init__(self, firstnamestudent, lastnamestudent, username, email, passwordstudent, staticphone, accountstudent,
                  dynamicphone, address, sex, deposited, flag):
