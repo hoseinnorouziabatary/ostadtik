@@ -1,23 +1,21 @@
+from sqlalchemy import Column, NVARCHAR, ForeignKey, INTEGER
 
-from flask_sqlalchemy import SQLAlchemy
-
+from ostadtik.route import db
 
 __author__ = "NOROUZI"
 
-dcm = SQLAlchemy()
 
-
-class Comment(dcm.Model):
+class Comment(db.Model):
     __table_name__ = "Comment"
-    commentid = dcm.Column(dcm.NVARCHAR(50), primary_key=True, unique=True, nullable=True)
-    comment_text = dcm.Column(dcm.NVARCHAR(1000), nullable=True)
-    point = dcm.Column(dcm.INT, nullable=True)
-    reply_text = dcm.Column(dcm.NVARCHAR(1000), nullable=True)
-    classtableid = dcm.Column(dcm.NVARCHAR(50), dcm.ForeignKey('ClassTable.ClassTableID'), nullable=True)
-    firstnameteacher = dcm.Column(dcm.NVARCHAR(40), dcm.ForeignKey('teacher.FirstNameTeacher'), nullable=True)
-    lastnameteacher = dcm.Column(dcm.NVARCHAR(40), dcm.ForeignKey('teacher.LastNameTeacher'), nullable=True)
-    firstnamestudent = dcm.Column(dcm.NVARCHAR(40), dcm.ForeignKey('student.FirstNameStudent'), nullable=True)
-    lastnamestudent = dcm.Column(dcm.NVARCHAR(40), dcm.ForeignKey('student.LastNameStudent'), nullable=True)
+    commentid = Column(NVARCHAR(50), primary_key=True, unique=True, nullable=True)
+    comment_text = Column(NVARCHAR(1000), nullable=True)
+    point = Column(INTEGER, nullable=True)
+    reply_text = Column(NVARCHAR(1000), nullable=True)
+    classtableid = Column(NVARCHAR(50), ForeignKey('ClassTable.ClassTableID'), nullable=True)
+    firstnameteacher = Column(NVARCHAR(40), ForeignKey('teacher.FirstNameTeacher'), nullable=True)
+    lastnameteacher = Column(NVARCHAR(40), ForeignKey('teacher.LastNameTeacher'), nullable=True)
+    firstnamestudent = Column(NVARCHAR(40), ForeignKey('student.FirstNameStudent'), nullable=True)
+    lastnamestudent = Column(NVARCHAR(40), ForeignKey('student.LastNameStudent'), nullable=True)
 
     def __init__(self, comment_text, point, reply_text):
         self.comment_text = comment_text

@@ -1,29 +1,26 @@
+from sqlalchemy import Column, NVARCHAR, ForeignKey, INTEGER
 
-
-from flask_sqlalchemy import SQLAlchemy
-
+from ostadtik.route import db
 
 __author__ = "NOROUZI"
 
-dcu = SQLAlchemy()
 
-
-class Course(dcu.Model):
+class Course(db.Model):
     __table_name__ = "Course"
-    courseid = dcu.Column(dcu.NVARCHAR(50), primary_key=True, unique=True, nullable=True)
-    area = dcu.Column(dcu.NVARCHAR(40), nullable=True)
-    city = dcu.Column(dcu.NVARCHAR(40), nullable=True)
-    secctionname = dcu.Column(dcu.NVARCHAR(40), nullable=True)
-    hoursone = dcu.Column(dcu.NVARCHAR(40), nullable=True)
-    number_count = dcu.Column(dcu.NVARCHAR(40), nullable=True)
-    price = dcu.Column(dcu.INT, nullable=True)
-    lastname = dcu.Column(dcu.NVARCHAR(40), nullable=True)
-    firstname = dcu.Column(dcu.NVARCHAR(40), nullable=True)
-    count_class = dcu.Column(dcu.NVARCHAR(40), nullable=True)
-    capacity = dcu.Column(dcu.NVARCHAR(40), nullable=True)
-    day = dcu.Column(dcu.NVARCHAR(40), nullable=True)
-    hoursinday = dcu.Column(dcu.NVARCHAR(40), nullable=True)
-    teacherid = dcu.Column(dcu.NVARCHAR(50), dcu.ForeignKey('teacher.TeacherID'), nullable=True)
+    courseid = Column(NVARCHAR(50), primary_key=True, unique=True, nullable=True)
+    area = Column(NVARCHAR(40), nullable=True)
+    city = Column(NVARCHAR(40), nullable=True)
+    secctionname = Column(NVARCHAR(40), nullable=True)
+    hoursone = Column(NVARCHAR(40), nullable=True)
+    number_count = Column(NVARCHAR(40), nullable=True)
+    price = Column(INTEGER, nullable=True)
+    lastname = Column(NVARCHAR(40), nullable=True)
+    firstname = Column(NVARCHAR(40), nullable=True)
+    count_class = Column(NVARCHAR(40), nullable=True)
+    capacity = Column(NVARCHAR(40), nullable=True)
+    day = Column(NVARCHAR(40), nullable=True)
+    hoursinday = Column(NVARCHAR(40), nullable=True)
+    teacherid = Column(NVARCHAR(50), ForeignKey('teacher.TeacherID'), nullable=True)
 
     def __init__(self, area, city, secctionname, hoursone, number_count, price, lastname, firstname, count_class,
                  capacity, day, hoursinday):

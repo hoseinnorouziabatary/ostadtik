@@ -19,3 +19,4 @@ def registerprofile():
 
     db.session.add(Profile(pdf=pdf, video=video, pictuer=pictuer, lastname=lastname, firstname=firstname,
                            activenon=activenon))
+    db.session.commit()

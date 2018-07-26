@@ -1,4 +1,4 @@
-from sqlalchemy import Column, NVARCHAR
+from sqlalchemy import Column, NVARCHAR, ForeignKey
 
 from ostadtik.route import db
 
@@ -13,7 +13,7 @@ class Profile(db.Model):
     pictuer = Column(NVARCHAR(40), nullable=True)
     lastname = Column(NVARCHAR(40), nullable=True)
     firstname = Column(NVARCHAR(40), nullable=True)
-    # teacherid = Column(NVARCHAR(50), ForeignKey('teacher.TeacherID'), nullable=True)
+    teacherid = Column(NVARCHAR(50), ForeignKey('teacher.TeacherID'), nullable=True)
     activenon = Column(NVARCHAR(40), nullable=True)
 
     def __init__(self, pdf, video, pictuer, lastname, firstname, activenon):
