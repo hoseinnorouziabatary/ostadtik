@@ -11,7 +11,7 @@ __author__ = "NOROUZI"
 student = Blueprint("Student", __name__)
 
 
-@student.route("/register", methods=['POST', 'GET'])
+@student.route("/register", methods=['GET'])
 def register():
     firstname = request.json['FirstName']
     username = request.json['UsreName']
@@ -33,17 +33,18 @@ def register():
     db.session.commit()
 
 
-@student.route('/login', methods=['GET'])
+@student.route('/login', methods=['GET', "POST"])
 def login():
     username = request.json['UsreName']
     password = request.json['password']
     email = request.json['Email']
     flag = Student.flag
+    id = Student.Studentid
 
     stored_user = Student.query.filter_by(username=username, email=email).first()
     if stored_user is not None and stored_user.check_password(password):
         login_user(stored_user)
-        return jsonify({"flag": flag, "email": email, "username": username, "password": password})
+        return jsonify({"flag": flag, "studentid": id})
     else:
         return jsonify({"flag": 2})
 

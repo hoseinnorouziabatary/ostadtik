@@ -10,7 +10,7 @@ __author__ = "NOROUZI"
 teacher = Blueprint("teacher", __name__)
 
 
-@teacher.route('/register_teacher', methods=["GET", "POST"])
+@teacher.route('/register_teacher', methods=["GET"])
 def register_teacher():
     educationalrecords = request.json['']
     academichonors = request.json['']
@@ -23,6 +23,3 @@ def register_teacher():
     db.session.add(Teacher(educationalrecords=educationalrecords, academichonors=academichonors,
                            lastnameteacher=lastnameteacher, firstnameteacher=firstnameteacher, ))
     db.session.commit()
-
-    flash("User registered successfully !")
-    return jsonify('hello')
