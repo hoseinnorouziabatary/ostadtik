@@ -1,4 +1,4 @@
-from flask import Blueprint, request, flash, jsonify
+from flask import Blueprint, request
 
 from ostadtik import db
 from ostadtik.teacher import Teacher
@@ -12,14 +12,10 @@ teacher = Blueprint("teacher", __name__)
 
 @teacher.route('/register_teacher', methods=["GET"])
 def register_teacher():
-    educationalrecords = request.json['']
-    academichonors = request.json['']
-    lastnameteacher = request.json['']
-    firstnameteacher = request.json['']
-    flag = request.json['']
+    educationalrecords = request.json['educationalrecords']
+    academichonors = request.json['academichonors']
+    flag = request.json['Flag']
 
     Student.i.query.filter_by(Student.flag).Update(flag=flag)
-
-    db.session.add(Teacher(educationalrecords=educationalrecords, academichonors=academichonors,
-                           lastnameteacher=lastnameteacher, firstnameteacher=firstnameteacher, ))
+    db.session.add(Teacher(educationalrecords=educationalrecords, academichonors=academichonors))
     db.session.commit()
