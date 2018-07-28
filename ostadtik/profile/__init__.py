@@ -11,17 +11,15 @@ class Profile(db.Model):
     pdf = Column(NVARCHAR(40), nullable=True)
     video = Column(NVARCHAR(40), nullable=True)
     pictuer = Column(NVARCHAR(40), nullable=True)
-    lastname = Column(NVARCHAR(40), nullable=True)
-    firstname = Column(NVARCHAR(40), nullable=True)
+    lastnameteacher = Column(NVARCHAR(40), ForeignKey('Teacher.lastnameteacher'), nullable=True)
+    firstnameteacher = Column(NVARCHAR(40), ForeignKey('Teacher.firstnameteacher'), nullable=True)
     teacherid = Column(NVARCHAR(50), ForeignKey('teacher.TeacherID'), nullable=True)
     activenon = Column(NVARCHAR(40), nullable=True)
 
-    def __init__(self, pdf, video, pictuer, lastname, firstname, activenon):
+    def __init__(self, pdf, video, pictuer, activenon):
         self.pdf = pdf
         self.video = video
         self.pictuer = pictuer
-        self.lastname = lastname
-        self.firstname = firstname
         self.activenon = activenon
 
     def __repr__(self):

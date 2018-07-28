@@ -27,6 +27,3 @@ def create_app(app):
     app.register_blueprint(price_blueprint)
 
     return app
-
-
-

@@ -1,4 +1,4 @@
-from flask import Blueprint, request, flash, jsonify
+from flask import Blueprint, request, jsonify
 
 from ostadtik import db
 from ostadtik.Student import Student
@@ -39,12 +39,12 @@ def login():
     password = request.json['password']
     email = request.json['Email']
     flag = Student.flag
-    id = Student.Studentid
+    studentid = Student.Studentid
 
     stored_user = Student.query.filter_by(username=username, email=email).first()
     if stored_user is not None and stored_user.check_password(password):
         login_user(stored_user)
-        return jsonify({"flag": flag, "studentid": id})
+        return jsonify({"flag": flag, "studentid": studentid})
     else:
         return jsonify({"flag": 2})
 

@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify, flash
+from flask import Blueprint, flash
 
 from ostadtik import db
 from ostadtik.price import Pricetable

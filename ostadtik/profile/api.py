@@ -10,13 +10,11 @@ profile = Blueprint("profile", __name__)
 
 @profile.route('/register_profile', methods=["POST"])
 def registerprofile():
-    pdf = request.json['']
-    video = request.json['']
-    pictuer = request.json['']
-    lastname = request.json['']
-    firstname = request.json['']
-    activenon = request.json['']
+    pdf = request.json['pdf']
+    video = request.json['video']
+    pictuer = request.json['pictuer']
+    activenon = request.json['activenon']
 
-    db.session.add(Profile(pdf=pdf, video=video, pictuer=pictuer, lastname=lastname, firstname=firstname,
+    db.session.add(Profile(pdf=pdf, video=video, pictuer=pictuer,
                            activenon=activenon))
     db.session.commit()
