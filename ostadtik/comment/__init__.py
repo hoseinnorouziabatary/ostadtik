@@ -9,7 +9,6 @@ class Comment(db.Model):
     __table_name__ = "Comment"
     commentid = Column(NVARCHAR(50), primary_key=True, unique=True, nullable=True)
     comment_text = Column(NVARCHAR(1000), nullable=True)
-    point = Column(INTEGER, nullable=True)
     reply_text = Column(NVARCHAR(1000), nullable=True)
     classtableid = Column(NVARCHAR(50), ForeignKey('ClassTable.ClassTableID'), nullable=True)
     firstnameteacher = Column(NVARCHAR(40), ForeignKey('teacher.FirstNameTeacher'), nullable=True)

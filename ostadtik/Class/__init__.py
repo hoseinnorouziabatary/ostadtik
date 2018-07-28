@@ -37,4 +37,5 @@ class Classtable(db.Model):
         return '<Class Day{},HoursInDay{},LastNameStudent{},LastNameTeacher{}>' .format(self.secctionname,
                                                                                         self.hoursinday,
                                                                                         self.lastnamestudent,
-                                                                                        self.lastnameteacher)
+                                                                                        self.lastnameteacher,
+                                                                                        self.point)
