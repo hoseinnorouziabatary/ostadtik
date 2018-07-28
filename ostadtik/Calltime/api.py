@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify, flash
+from flask import Blueprint, request, jsonify
 
 from ostadtik import db
 from ostadtik.Calltime import Call
@@ -25,5 +25,4 @@ def cal():
                         azinyy=azinyy, tainyy=tainyy, azinmm=azinmm, tainmm=tainmm, azindd=azindd, taindd=taindd))
     db.session.commit()
 
-    flash("The operation was successful")
-    return jsonify('')
+    return jsonify({'The operation was successful'})

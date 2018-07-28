@@ -13,39 +13,34 @@ student = Blueprint("Student", __name__)
 
 @student.route("/register", methods=['POST', 'GET'])
 def register():
-    firstname = request.json['']
-    username = request.json['']
-    password = request.json['']
-    rewritepassword = request.json['']
-    lastname = request.json['']
-    email = request.json['']
-    staticphone = request.json['']
-    dynamicphone = request.json['']
-    address = request.json['']
-    sex = request.json['']
-    depositedy = request.json['']
+    firstname = request.json['FirstName']
+    username = request.json['UsreName']
+    password = request.json['password']
+    lastname = request.json['LastName']
+    email = request.json['email']
+    staticphone = request.json['StaticPhone']
+    dynamicphone = request.json['DynamicPhone']
+    address = request.json['Address']
+    sex = request.json['Sex']
+    accountstudent = request.json['AccountStudent']
 
-    if rewritepassword == password:
-        db.session.add(Student(username=username, passwordstudent=password, firstnamestudent=firstname,
-                               lastnamestudent=lastname, email=email, staticphone=staticphone,
-                               dynamicphone=dynamicphone, address=address, sex=sex, deposited=depositedy,
-                               accountstudent=0, flag=False))
+    db.session.add(Student(username=username, passwordstudent=password, firstnamestudent=firstname,
+                           lastnamestudent=lastname, email=email, staticphone=staticphone,
+                           dynamicphone=dynamicphone, address=address, sex=sex,
+                           accountstudent=accountstudent, flag=False))
 
-        db.session.commit()
-
-    flash("User registered successfully !")
-    return jsonify('hello')
+    db.session.commit()
 
 
 @student.route('/login', methods=['GET'])
 def login():
     username = request.json['']
     password = request.json['']
+    email = request.json['']
 
-    stored_user = Student.query.filter_by(username=username).first()
+    stored_user = Student.query.filter_by(username=username, email=email).first()
     if stored_user is not None and stored_user.check_password(password):
         login_user(stored_user)
-        flash("you are logged as {} to your account.")
         return jsonify('')
     else:
         flash("user or password is incorrect")

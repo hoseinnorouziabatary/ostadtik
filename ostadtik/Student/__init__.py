@@ -20,12 +20,11 @@ class Student(db.Model, UserMixin):
     dynamicphone = Column(NVARCHAR(40), nullable=True)
     address = Column(NVARCHAR(40), nullable=True)
     sex = Column(NVARCHAR(40), nullable=True)
-    deposited = Column(NVARCHAR(40), nullable=True)
     accountstudent: Column(NVARCHAR(50), nullable=False)
     flag = Column(BOOLEAN, nullable=True)
 
     def __init__(self, firstnamestudent, lastnamestudent, username, email, passwordstudent, staticphone, accountstudent,
-                 dynamicphone, address, sex, deposited, flag):
+                 dynamicphone, address, sex, flag):
         self.firstnamestudent = firstnamestudent
         self.lastnamestudent = lastnamestudent
         self.username = username
@@ -35,7 +34,6 @@ class Student(db.Model, UserMixin):
         self.dynamicphone = dynamicphone
         self.address = address
         self.sex = sex
-        self.deposited = deposited
         self.accountstudent = accountstudent
         self.flag = flag
 
