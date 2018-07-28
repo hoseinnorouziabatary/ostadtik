@@ -16,8 +16,9 @@ def register_teacher():
     academichonors = request.json['']
     lastnameteacher = request.json['']
     firstnameteacher = request.json['']
+    flag = request.json['']
 
-    Student.i.query.filter_by(Student.flag).Update(flag=True)
+    Student.i.query.filter_by(Student.flag).Update(flag=flag)
 
     db.session.add(Teacher(educationalrecords=educationalrecords, academichonors=academichonors,
                            lastnameteacher=lastnameteacher, firstnameteacher=firstnameteacher, ))

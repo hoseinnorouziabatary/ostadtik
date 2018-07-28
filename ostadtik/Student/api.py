@@ -2,7 +2,7 @@ from flask import Blueprint, request, flash, jsonify
 
 from ostadtik import db
 from ostadtik.Student import Student
-from flask_login import login_user, logout_user
+from flask_login import login_user
 
 
 __author__ = "NOROUZI"
@@ -23,35 +23,29 @@ def register():
     address = request.json['Address']
     sex = request.json['Sex']
     accountstudent = request.json['AccountStudent']
+    flag = request.json['Flag']
 
     db.session.add(Student(username=username, passwordstudent=password, firstnamestudent=firstname,
                            lastnamestudent=lastname, email=email, staticphone=staticphone,
                            dynamicphone=dynamicphone, address=address, sex=sex,
-                           accountstudent=accountstudent, flag=False))
+                           accountstudent=accountstudent, flag=flag))
 
     db.session.commit()
 
 
 @student.route('/login', methods=['GET'])
 def login():
-    username = request.json['']
-    password = request.json['']
-    email = request.json['']
+    username = request.json['UsreName']
+    password = request.json['password']
+    email = request.json['Email']
+    flag = Student.flag
 
     stored_user = Student.query.filter_by(username=username, email=email).first()
     if stored_user is not None and stored_user.check_password(password):
         login_user(stored_user)
-        return jsonify('')
+        return jsonify({"flag": flag, "email": email, "username": username, "password": password})
     else:
-        flash("user or password is incorrect")
-        return jsonify('')
-
-
-@student.route('/logout')
-def logout():
-    logout_user()
-    flash('you are logged out successfully !')
-    return jsonify('')
+        return jsonify({"flag": 2})
 
 
 @student.route('/update')

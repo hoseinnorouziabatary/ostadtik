@@ -21,7 +21,7 @@ class Student(db.Model, UserMixin):
     address = Column(NVARCHAR(40), nullable=True)
     sex = Column(NVARCHAR(40), nullable=True)
     accountstudent: Column(NVARCHAR(50), nullable=False)
-    flag = Column(BOOLEAN, nullable=True)
+    flag = Column(NVARCHAR(40), nullable=True)
 
     def __init__(self, firstnamestudent, lastnamestudent, username, email, passwordstudent, staticphone, accountstudent,
                  dynamicphone, address, sex, flag):
