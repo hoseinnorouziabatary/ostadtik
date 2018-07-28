@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify, flash
+from flask import Blueprint, request, jsonify
 
 from ostadtik import db
 from ostadtik.comment import Comment
@@ -10,11 +10,14 @@ comment_blueprint = Blueprint("comment", __name__)
 
 @comment_blueprint.route('/comment', methods=['GET', 'POST'])
 def comment_route():
-    comment_text = request.json['']
-    reply_text = request.json['']
+    firstnameteachercomment = request.json['FirstNameTeacherComment']
+    lastnameteachercomment = request.json['LastNameTeacherComment']
+    usernamecomment = request.json['UserNameComment']
+    commandtext = request.json['CommandText']
 
-    db.session.add(Comment(comment_text=comment_text, point=point, reply_text=reply_text))
+    db.session.add(Comment(firstnameteachercomment=firstnameteachercomment,
+                           lastnameteachercomment=lastnameteachercomment,
+                           usernamecomment=usernamecomment, commandtext=commandtext))
     db.session.commit()
 
-    flash("The operation was successful")
     return jsonify('')
