@@ -28,5 +28,3 @@ def course_route():
                           price=price, lastname=lastname, firstname=firstname,
                           count_class=countclass, capacity=capacity, day=day, hoursinday=hoursinday))
     db.session.commit()
-
-

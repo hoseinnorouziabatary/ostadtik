@@ -21,7 +21,6 @@ class Course(db.Model):
     day = Column(NVARCHAR(40), nullable=True)
     hoursinday = Column(NVARCHAR(40), nullable=True)
     teacherid = Column(NVARCHAR(50), ForeignKey('teacher.TeacherID'), nullable=True)
-    pointage = Column(NVARCHAR(50), nullable=False)
 
     def __init__(self, area, city, secctionname, hoursone, number_count, price, lastname, firstname, count_class,
                  capacity, day, hoursinday):

@@ -22,7 +22,7 @@ class Classtable(db.Model):
     hoursinday = Column(NVARCHAR(40), ForeignKey('Course.HoursInDay'), nullable=True)
 
     def __init__(self, price, hoursone, number_count, firstnamestudent, firstnameteacher, lastnamestudent,
-                 lastnameteacher, day, hoursinday):
+                 lastnameteacher, day, hoursinday, point):
         self.price = price
         self.hoursone = hoursone
         self.number_count = number_count
@@ -32,6 +32,7 @@ class Classtable(db.Model):
         self.lastnameteacher = lastnameteacher
         self.day = day
         self.hoursinday = hoursinday
+        self.point = point
 
     def __repr__(self):
         return '<Class Day{},HoursInDay{},LastNameStudent{},LastNameTeacher{}>' .format(self.secctionname,

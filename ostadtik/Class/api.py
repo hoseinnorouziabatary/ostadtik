@@ -1,10 +1,11 @@
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, jsonify
 
 
 from ostadtik import db
 from ostadtik.Student import Student
 from ostadtik.price import Pricetable
 from ostadtik.Class import Classtable
+
 __author__ = "NOROUZI"
 
 classtable = Blueprint("classtable", __name__)
@@ -12,6 +13,7 @@ classtable = Blueprint("classtable", __name__)
 
 @classtable.route('/class', methods=['GET', 'POST'])
 def get_class():
+
     data = Classtable.query.all()
 
     data_all = []
@@ -24,7 +26,7 @@ def get_class():
     return jsonify(ClassTable=data_all)
 
 
-@classtable.route('/Class/payment', methods=['GET','POST'])
+@classtable.route('/Class/payment', methods=['GET', 'POST'])
 def payment():
 
     if Classtable.price <= Pricetable.ostadbank:
