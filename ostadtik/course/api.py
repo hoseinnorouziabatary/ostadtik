@@ -1,4 +1,4 @@
-from flask import Blueprint, request
+from flask import Blueprint, request, jsonify
 
 from ostadtik import db
 from ostadtik.course import Course
@@ -26,3 +26,7 @@ def course_route():
                           price=price,
                           count_class=countclass, capacity=capacity, day=day, hoursinday=hoursinday))
     db.session.commit()
+
+    return jsonify({"Area": area, "city": city, "secctionname": secctionname, "hoursone": hoursone,
+                    "numbercount": numbercount, "price": price, "countclass": countclass, "capacity": capacity,
+                    "day": day, "hoursinday": hoursinday})

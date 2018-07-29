@@ -20,4 +20,6 @@ def comment_route():
                            usernamecomment=usernamecomment, commandtext=commandtext))
     db.session.commit()
 
-    return jsonify('')
+    return jsonify({"Firstnameteachercomment": firstnameteachercomment,
+                    "Lastnameteachercomment": lastnameteachercomment, "usernamecomment": usernamecomment,
+                    "commandtext": commandtext})

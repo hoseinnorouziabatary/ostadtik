@@ -14,13 +14,11 @@ class Profile(db.Model):
     lastnameteacher = Column(NVARCHAR(40), ForeignKey('Teacher.lastnameteacher'), nullable=True)
     firstnameteacher = Column(NVARCHAR(40), ForeignKey('Teacher.firstnameteacher'), nullable=True)
     teacherid = Column(NVARCHAR(50), ForeignKey('teacher.TeacherID'), nullable=True)
-    activenon = Column(NVARCHAR(40), nullable=True)
 
-    def __init__(self, pdf, video, pictuer, activenon):
+    def __init__(self, pdf, video, pictuer):
         self.pdf = pdf
         self.video = video
         self.pictuer = pictuer
-        self.activenon = activenon
 
     def __repr__(self):
         return '<profile LastName{},FirstName{} >' .format(self.lastname, self.firstname)

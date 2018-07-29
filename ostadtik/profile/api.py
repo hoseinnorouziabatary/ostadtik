@@ -8,13 +8,23 @@ __author__ = "NOROUZI"
 profile = Blueprint("profile", __name__)
 
 
-@profile.route('/register_profile', methods=["POST"])
-def registerprofile():
+@profile.route('/register_pdf', methods=["POST"])
+def registerpdf():
     pdf = request.json['pdf']
-    video = request.json['video']
-    pictuer = request.json['pictuer']
-    activenon = request.json['activenon']
-
-    db.session.add(Profile(pdf=pdf, video=video, pictuer=pictuer,
-                           activenon=activenon))
+    Profile.query.filter_by(Profile.pdf).Update(pdf=pdf)
     db.session.commit()
+
+
+@profile.route('/register_video', methods=["POST"])
+def registervideo():
+    video = request.json['video']
+    Profile.query.filter_by(Profile.video).Update(video=video)
+    db.session.commit()
+
+
+@profile.route('/register_pictuer', methods=['POST'])
+def registerpictuer():
+    pictuer = request.json['pictuer']
+    Profile.query.filter_by(Profile.pictuer).Update(pictuer=pictuer)
+    db.session.commit()
+
