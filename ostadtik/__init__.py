@@ -23,7 +23,5 @@ def create_app(app):
     app.register_blueprint(profile_blueprint)
     from ostadtik.Class.api import classtable as class_blueprint
     app.register_blueprint(class_blueprint)
-    from ostadtik.price.api import price as price_blueprint
-    app.register_blueprint(price_blueprint)
 
     return app
