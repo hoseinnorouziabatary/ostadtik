@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify,request
+from flask import Blueprint, jsonify, request
 
 
 from ostadtik import db
